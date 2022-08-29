@@ -9,19 +9,19 @@ import { deviceWidth } from '../utils/constants';
 const nav = [
   {
     label: "Notifications",
-    to: "NotificationsList",
+    to: "Notifications",
     iconName: "bell",
     iconType: "FontAwesome5"
   },
   {
     label: "Directories",
-    to: "DirectoryList",
+    to: "Directories",
     iconName: "store-mall-directory",
     iconType: "MaterialIcons"
   },
   {
     label: "Profile",
-    to: "MyProfile",
+    to: "Profile",
     iconName: "user",
   },
   {

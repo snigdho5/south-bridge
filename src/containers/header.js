@@ -3,7 +3,7 @@ import React from 'react'
 import { app } from '../utils/colors'
 import Icon from '../components/icon'
 import Text from '../components/text'
-import { goBack, toggleDrawer } from '../utils/config';
+import { goBack, navigate, toggleDrawer } from '../utils/config';
 
 export default function Header(props) {
     const { name } = props;
@@ -41,6 +41,11 @@ export default function Header(props) {
                 </View>
             );
         case "ServicesList":
+        case "Directories":
+        case "Notifications":
+        case "Subscription":
+        case "Order History":
+        case "Edit Profile":
             return (
                 <View style={styles.container}>
                     <View style={styles.row}>
@@ -51,7 +56,28 @@ export default function Header(props) {
                             onPress={() => goBack()}
                         />
                         <Text size={20} style={{ paddingLeft: 15 }}>
-                            Services
+                            {name}
+                        </Text>
+                    </View>
+                </View>
+            );
+        case "Profile":
+            return (
+                <View style={styles.container}>
+                    <View style={styles.row}>
+                        <Icon
+                            type="Feather"
+                            name="chevron-left"
+                            size={30}
+                            onPress={() => goBack()}
+                        />
+                        <Text size={20} style={{ paddingLeft: 15 }}>
+                            {name}
+                        </Text>
+                    </View>
+                    <View style={[styles.row, { width: '10%' }]}>
+                        <Text size={16} onPress={() => navigate("UpdateProfile")}>
+                            Edit
                         </Text>
                     </View>
                 </View>

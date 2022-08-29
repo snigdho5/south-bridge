@@ -10,12 +10,12 @@ const nav = [
   {
     label: "Directories",
     img: directoriesIcon,
-    to: 'DirectoryList'
+    to: 'Directories'
   },
   {
     label: "My Profile",
     img: profileIcon,
-    to: 'MyProfile'
+    to: 'Profile'
   },
   {
     label: "Subscribe",
@@ -25,38 +25,32 @@ const nav = [
   {
     label: "Order History",
     img: passwordIcon,
-    to: 'OrderHistory'
+    to: 'OrderHistories'
   },
   {
     label: "About Us",
     img: contactIcon,
-    to: 'DirectoryList'
+    to: 'Directories'
   },
   {
     label: "Privacy-Policy",
     img: privacyIcon,
-    to: 'DirectoryList'
+    to: 'Directories'
   },
   {
     label: "Terms of Services",
     img: tcIcon,
-    to: 'DirectoryList'
+    to: 'Directories'
   },
   {
     label: "Logout",
     img: logoutIcon,
-    to: 'DirectoryList'
+    to: 'Directories'
   },
 ]
 
 
 const CustomSidebarMenu = props => {
-
-  const logout = () => {
-    // AsyncStorage.clear();
-    console.log('props.navigation.navigate: ', props.navigation.navigate('LoginScreen'))
-    props.navigation.navigate('LoginScreen');
-  };
 
   const onClick = (item) => {
     if (item?.label == "Logout") {
@@ -64,7 +58,7 @@ const CustomSidebarMenu = props => {
         'Confirm',
         'Are you sure you want to logout?',
         [
-          { text: 'OK', onPress: () => navigate('LoginScreen') },
+          { text: 'OK', onPress: () => navigate('Login') },
           { text: 'Cancel', onPress: () => console.log('cancelled') },
         ],
         { cancelable: false },

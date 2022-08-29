@@ -9,3 +9,5 @@ export const privacyIcon = require('../assets/images/outline_security_black_48.p
 export const tcIcon = require('../assets/images/outline_privacy_tip_black_48.png')
 export const logoutIcon = require('../assets/images/logout-icon.png')
 export const splash = require('../assets/images/splash.png')
+export const fb = require('../assets/images/fb.png')
+export const google = require('../assets/images/goo.png')

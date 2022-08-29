@@ -4,9 +4,7 @@ import { createNavigationContainerRef, DrawerActions, StackActions } from '@reac
 export const navigationRef = createNavigationContainerRef();
 
 export function navigate(name, params) {
-    if (navigationRef.isReady()) {
-        navigationRef.navigate(name, params);
-    }
+    navigationRef.navigate(name, params);
 }
 
 export function goBack(count = 1) {
@@ -16,3 +14,4 @@ export function goBack(count = 1) {
 export function toggleDrawer() {
     navigationRef.dispatch(DrawerActions.openDrawer());
 }
+
