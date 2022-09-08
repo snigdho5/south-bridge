@@ -1,17 +1,12 @@
+// import firebase from '@react-native-firebase/app';
+// import messaging from '@react-native-firebase/messaging'
 
-import { createNavigationContainerRef, DrawerActions, StackActions } from '@react-navigation/native';
+export const BASE_URL = "http://182.75.124.211/southbridge/admin/";
 
-export const navigationRef = createNavigationContainerRef();
+// const credentials = {
+//     projectId: "eximhub-lnsel",
+//     appId: "1:57101272321:android:5f3a714bda7ede720a4700"
+// };
 
-export function navigate(name, params) {
-    navigationRef.navigate(name, params);
-}
-
-export function goBack(count = 1) {
-    navigationRef.current?.dispatch(StackActions.pop(count));
-}
-
-export function toggleDrawer() {
-    navigationRef.dispatch(DrawerActions.openDrawer());
-}
-
+// const fire = await firebase.initializeApp(credentials);
+// export { fire, messaging }

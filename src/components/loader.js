@@ -1,11 +1,11 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
-import { black } from '../utils/colors';
+import { app, black } from '../utils/colors';
 import { deviceHeight, deviceWidth } from '../utils/constants';
 
 const Loader = ({
     size = "large",
-    color = black,
+    color = app,
     visible
 }) => (visible ?
     <ActivityIndicator
@@ -18,10 +18,10 @@ const Loader = ({
 
 const styles = StyleSheet.create({
     loader: {
-        backgroundColor: black + 10,
+        backgroundColor: black + 30,
         width: deviceWidth,
         height: deviceHeight,
-        position:'absolute',
+        position: 'absolute',
         zIndex: 99
     }
 });

@@ -3,14 +3,19 @@ import React from 'react'
 import { Picker as PickerRN } from '@react-native-picker/picker'
 import { isIphone } from '../utils/constants'
 import Text from './text';
-import { app } from '../utils/colors';
+import { app, red } from '../utils/colors';
 
 export default function Picker(props) {
     const {
         list,
         style,
+        error,
         catSelected,
-        setCatSelected
+        displayKey,
+        displayLabel,
+        displayValue,
+        setCatSelected,
+        placeholder = "Select Category"
     } = props;
 
 
@@ -30,33 +35,40 @@ export default function Picker(props) {
 
 
     return (
-        <View style={style}>
-            {isIphone ?
-                <TouchableOpacity onPress={ActionSheetIOSonPress}>
-                    <View style={{}}>
-                        <Text style={{}}>{catSelected}</Text>
-                    </View>
-                </TouchableOpacity>
-                :
-                <PickerRN
-                    selectedValue={catSelected}
-                    dropdownIconColor={app}
-                    mode='dropdown'
-                    style={{
-                        width: '100%',
-                        color: app,
-                    }}
-                    onValueChange={
-                        (itemValue) => setCatSelected(itemValue)
-                    }
-                >
-                    <PickerRN.Item label="Select Category" value="" />
-                    {list.map((Item) => {
-                        return <PickerRN.Item key={Item} label={Item} value={Item} />
-                    })}
-                </PickerRN>
-            }
-        </View>
+        <>
+            <View style={style}>
+                {isIphone ?
+                    <TouchableOpacity onPress={ActionSheetIOSonPress}>
+                        <View style={{}}>
+                            <Text style={{}}>{catSelected}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    :
+                    <PickerRN
+                        selectedValue={catSelected}
+                        dropdownIconColor={app}
+                        mode='dropdown'
+                        style={{
+                            width: '102%',
+                            color: app,
+                            marginLeft: -5
+                        }}
+                        onValueChange={
+                            (itemValue) => setCatSelected(itemValue)
+                        }
+                    >
+                        <PickerRN.Item label={placeholder} value="" />
+                        {list.map((Item) => {
+                            return typeof (Item) === 'object' ?
+                                <PickerRN.Item key={Item[displayKey]} label={Item[displayLabel]} value={Item[displayValue]} />
+                                :
+                                <PickerRN.Item key={Item} label={Item} value={Item} />
+                        })}
+                    </PickerRN>
+                }
+            </View>
+            {error ? <Text color={red}>{error}</Text> : null}
+        </>
     )
 }
 const styles = StyleSheet.create({

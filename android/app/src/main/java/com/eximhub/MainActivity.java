@@ -1,4 +1,4 @@
-package com.eximhub;
+package com.lnsel.eximhub;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

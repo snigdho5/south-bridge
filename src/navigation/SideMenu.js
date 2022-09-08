@@ -3,8 +3,9 @@ import React from 'react';
 import { Alert, Image, SafeAreaView, StyleSheet, View } from 'react-native';
 import BaseView from '../containers/base';
 import { app } from '../utils/colors';
-import { navigate } from '../utils/config';
+import { navigate } from '../navigation/routeRef';
 import { contactIcon, dashboardIcon, directoriesIcon, logo, logoutIcon, passwordIcon, privacyIcon, profileIcon, subscriptionIcon, tcIcon } from '../utils/images';
+import { useAuth } from '../context/authContext';
 
 const nav = [
   {
@@ -51,6 +52,7 @@ const nav = [
 
 
 const CustomSidebarMenu = props => {
+  const { setUser } = useAuth();
 
   const onClick = (item) => {
     if (item?.label == "Logout") {
@@ -58,7 +60,7 @@ const CustomSidebarMenu = props => {
         'Confirm',
         'Are you sure you want to logout?',
         [
-          { text: 'OK', onPress: () => navigate('Login') },
+          { text: 'OK', onPress: () => setUser(undefined) },
           { text: 'Cancel', onPress: () => console.log('cancelled') },
         ],
         { cancelable: false },

@@ -1,7 +1,7 @@
 import { FlatList, Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { app, white } from '../utils/colors';
-import { navigate } from '../utils/config';
+import { navigate } from '../navigation/routeRef';
 import Text from '../components/text';
 import Icon from '../components/icon';
 import { deviceWidth } from '../utils/constants';

@@ -7,7 +7,7 @@ import Text from '../../components/text'
 import BaseView from '../../containers/base'
 import SocialLogin from '../../containers/socialLogin'
 import { app, black } from '../../utils/colors'
-import { navigate } from '../../utils/config'
+import { navigate } from '../../navigation/routeRef'
 import { logo } from '../../utils/images'
 
 export default function Forgot() {

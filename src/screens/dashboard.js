@@ -6,7 +6,7 @@ import BaseView from '../containers/base'
 import Footer from '../containers/footerDashboard'
 import Header from '../containers/header'
 import { app } from '../utils/colors'
-import { navigate } from '../utils/config'
+import { navigate } from '../navigation/routeRef'
 
 export default function Dashboard() {
   return (

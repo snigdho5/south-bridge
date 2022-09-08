@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "57101272321",
+    "project_id": "eximhub-lnsel",
+    "storage_bucket": "eximhub-lnsel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57101272321:android:5f3a714bda7ede720a4700",
+        "android_client_info": {
+          "package_name": "com.lnsel.eximhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57101272321-8172jfl549ua0m523g3069qfrm3ohj2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFgX2Zv1xoAinhXx9a_hElnaaHiGMiCzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57101272321-8172jfl549ua0m523g3069qfrm3ohj2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

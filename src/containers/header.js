@@ -3,7 +3,7 @@ import React from 'react'
 import { app } from '../utils/colors'
 import Icon from '../components/icon'
 import Text from '../components/text'
-import { goBack, navigate, toggleDrawer } from '../utils/config';
+import { goBack, navigate, toggleDrawer } from '../navigation/routeRef';
 
 export default function Header(props) {
     const { name } = props;

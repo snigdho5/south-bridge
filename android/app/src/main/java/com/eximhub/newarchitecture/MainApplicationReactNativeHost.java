@@ -1,4 +1,4 @@
-package com.eximhub.newarchitecture;
+package com.lnsel.eximhub.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.eximhub.BuildConfig;
-import com.eximhub.newarchitecture.components.MainComponentsRegistry;
-import com.eximhub.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.lnsel.eximhub.BuildConfig;
+import com.lnsel.eximhub.newarchitecture.components.MainComponentsRegistry;
+import com.lnsel.eximhub.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
