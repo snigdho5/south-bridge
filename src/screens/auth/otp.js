@@ -26,8 +26,7 @@ export default function OTP() {
         else res = await otp_verify(formData({ phone: user?.phone, otp: code }));
         setLoading(false)
         ToastSuccess(res?.message ?? "Successfully Logged In!", 'OTP');
-        if (user?.login_otp) setUser(res);
-        else setUser(res?.data);
+        setUser(res?.data);
       } catch (error) {
         setLoading(false)
         console.log(error)

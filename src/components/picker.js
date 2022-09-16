@@ -1,9 +1,11 @@
-import { View, StyleSheet, TouchableOpacity, ActionSheetIOS } from 'react-native'
-import React from 'react'
+import { View, StyleSheet, TouchableOpacity, ActionSheetIOS, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Picker as PickerRN } from '@react-native-picker/picker'
-import { isIphone } from '../utils/constants'
+import { deviceHeight, isIphone } from '../utils/constants'
 import Text from './text';
-import { app, red } from '../utils/colors';
+import { app, red, white } from '../utils/colors';
+import Input from './input';
+import Modal from 'react-native-modal';
 
 export default function Picker(props) {
     const {
@@ -17,60 +19,106 @@ export default function Picker(props) {
         setCatSelected,
         placeholder = "Select Category"
     } = props;
+    const [selecteedItem, setSelecteedItem] = useState({})
+    const [visible, setVisible] = useState(false);
+    const [filterData, setFilterData] = useState([])
 
+    useEffect(() => { if (filterData.length < 1) setFilterData(list) }, [list, visible])
 
-    const ActionSheetIOSonPress = () =>
-        ActionSheetIOS.showActionSheetWithOptions(
-            {
-                options: list,
-                destructiveButtonIndex: 5,
-                title: 'Select One',
-                uttonIndex: 5,
-                userInterfaceStyle: 'dark'
-            },
-            buttonIndex => {
-
-            }
-        );
-
+    const searchKey = (title) => {
+        if (title) {
+            const titleData = title.toUpperCase();
+            const newData = list.filter(item => {
+                const itemData = item[displayLabel].toUpperCase()
+                return itemData.indexOf(titleData) > -1;
+            });
+            if (newData.length) setFilterData(newData)
+            else { setFilterData([]) }
+        }
+    }
 
     return (
         <>
-            <View style={style}>
-                {isIphone ?
-                    <TouchableOpacity onPress={ActionSheetIOSonPress}>
-                        <View style={{}}>
-                            <Text style={{}}>{catSelected}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    :
-                    <PickerRN
-                        selectedValue={catSelected}
-                        dropdownIconColor={app}
-                        mode='dropdown'
-                        style={{
-                            width: '102%',
-                            color: app,
-                            marginLeft: -5
-                        }}
-                        onValueChange={
-                            (itemValue) => setCatSelected(itemValue)
-                        }
-                    >
-                        <PickerRN.Item label={placeholder} value="" />
-                        {list.map((Item) => {
-                            return typeof (Item) === 'object' ?
-                                <PickerRN.Item key={Item[displayKey]} label={Item[displayLabel]} value={Item[displayValue]} />
-                                :
-                                <PickerRN.Item key={Item} label={Item} value={Item} />
-                        })}
-                    </PickerRN>
+            <TouchableOpacity
+                style={[styles.container, style]}
+                onPress={() => setVisible(true)}
+            >
+                <Text
+                    size={16}
+                    color={app}
+                    style={{ marginLeft: 10 }}
+                >
+                    {selecteedItem[displayLabel] ?? placeholder}
+                </Text>
+            </TouchableOpacity>
+            <Modal
+                style={{
+                    margin: 0,
+                    justifyContent: 'flex-end',
+                }}
+                isVisible={visible}
+                onBackButtonPress={() =>
+                    setVisible(false)
                 }
-            </View>
+                onBackdropPress={() =>
+                    setVisible(false)
+                }
+            >
+                <View style={styles.modalView}>
+                    <Input
+                        placeholder={"Search here..."}
+                        setValue={v => searchKey(v)}
+                        autoFocus
+                    />
+                    <FlatList
+                        data={filterData ?? list}
+                        keyboardShouldPersistTaps='handled'
+                        style={{ maxHeight: deviceHeight / 2 }}
+                        extraData={list}
+                        ListEmptyComponent={() => <Text blackText >No Data Found!</Text>}
+                        keyExtractor={v => v[displayKey]}
+                        renderItem={({ item }) =>
+                            <TouchableOpacity onPress={() => {
+                                setSelecteedItem(item);
+                                setVisible(false)
+                                setCatSelected(item[displayValue])
+                                setFilterData([])
+                            }} >
+                                <Text
+                                    blackText
+                                    size={18}
+                                    style={styles.txt}
+                                >
+                                    {item[displayLabel]}
+                                </Text>
+                            </TouchableOpacity>
+                        }
+                    />
+                </View>
+            </Modal>
+
+
             {error ? <Text color={red}>{error}</Text> : null}
         </>
     )
 }
 const styles = StyleSheet.create({
-
+    container: {
+        height: 50,
+        width: '100%',
+        justifyContent: 'center'
+    },
+    modalView: {
+        paddingVertical: 10,
+        maxHeight: deviceHeight / 1.3,
+        justifyContent: 'flex-end',
+        width: '100%',
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        backgroundColor: white,
+    },
+    txt: {
+        padding: 5,
+        paddingHorizontal: 10
+    }
 })

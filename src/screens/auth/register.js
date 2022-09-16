@@ -15,6 +15,7 @@ import Form from '../../components/form'
 import { useAuth } from '../../context/authContext'
 import { register } from '../../services/auth'
 import { ToastError } from '../../utils/toast'
+import Loader from '../../components/loader'
 
 
 export default function Register() {
@@ -25,21 +26,22 @@ export default function Register() {
     email: __DEV__ ? "test@tes.com" : "",
     phone: __DEV__ ? "9928185712" : "",
     address: __DEV__ ? "TEst" : "",
-    country_id: __DEV__ ? "101" : "",
-    state_id: __DEV__ ? "33" : "",
-    city_id: __DEV__ ? "3297" : "",
+    country_id: "",
+    state_id: "",
+    city_id: "",
     pin_code: __DEV__ ? "123123" : "",
     iec_no: __DEV__ ? "1231231231" : "",
     gst_no: __DEV__ ? "09AAACH7409R1ZZ" : "",
     pan_no: __DEV__ ? "AAACH7409R" : "",
-    user_category_id: __DEV__ ? "3" : "",
-    user_sub_category_id: __DEV__ ? "1" : "",
+    user_category_id: "",
+    user_sub_category_id: "0",
     fcm_token: "",
   });
-  const [countries, setCountries] = useState([])
   const [categories, setCategories] = useState([])
+  const [countries, setCountries] = useState([])
   const [states, setStates] = useState([])
   const [cities, setCities] = useState([])
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState({});
 
   useEffect(() => {
@@ -55,28 +57,37 @@ export default function Register() {
 
   const getCountry = async () => {
     try {
+      setLoading(true);
       let cat = await userCategoryList();
       setCategories(cat?.data)
       let res = await countryList();
       setCountries(res?.data)
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       ToastError(error?.message, 'Register')
     }
   }
 
   const getState = async () => {
     try {
+      setLoading(true);
       let res = await stateList(formData(data));
       setStates(res?.data)
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       ToastError(error?.message, 'Register')
     }
   }
   const getCity = async () => {
     try {
+      setLoading(true);
       let res = await cityList(formData(data));
       setCities(res?.data)
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       ToastError(error?.message, 'Register')
     }
   }
@@ -89,20 +100,25 @@ export default function Register() {
   }
 
   const onRegister = async () => {
+    console.log(data)
     const validate = validateRegister(data);
     setError(validate);
-    if (Object.values(validate).length < 1) {
-      try {
-        let res = await register(formData(data))
-        setUser(res?.data);
-      } catch (error) {
-        ToastError(error?.message, 'Register')
-      }
-    }
+    // if (Object.values(validate).length < 1) {
+    //   try {
+    //     setLoading(true);
+    //     let res = await register(formData(data))
+    //     setUser(res?.data);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     setLoading(false);
+    //     ToastError(error?.message, 'Register')
+    //   }
+    // }
   }
 
   return (
     <BaseView>
+      <Loader visible={loading} />
       <KeyboardAvoidingView keyboardVerticalOffset={20}>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, alignItems: 'center' }}>
           <Text color={app} size={30} style={styles.heading}>Registration</Text>

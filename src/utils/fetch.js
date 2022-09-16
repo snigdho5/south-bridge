@@ -14,7 +14,7 @@ const post = (url, data, form = false, token) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.status === true || data.status === 'success' || data?.user_id) {
+                if (data.status === true || data.status === 'success') {
                     resolve(data);
                 } else {
                     reject(new Error(data.message ?? "Something went wrong!!"));
